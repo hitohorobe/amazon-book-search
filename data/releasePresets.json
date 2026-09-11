@@ -1,0 +1,12 @@
+{
+  "verified": true,
+  "notice": "紙書籍(rh=n:465392配下)のrhキーはKindle版のp_n_dateとは異なりp_n_publication_dateであることを、Google検索でインデックスされたAmazon.co.jpの実URL(例: https://www.amazon.co.jp/-/en/Japanese-Books-Released-today/s?rh=n:465392,p_n_publication_date:2285987051 )から確認しました(確認日: 2026-09-11)。「本日発売」「明日発売」「7日以内」「90日以内」はn:465392と組み合わさったURLで直接確認、「3日以内」「30日以内」は他のnode(新刊・予約など)のURLでしか確認できていませんでしたが、実際にブラウザで検索結果に反映されることをユーザーが確認済みです(確認日: 2026-09-11)。「発売中」に対応する専用のnode idは見つからなかったため、プリセットを何も選択しない状態(デフォルト)が「発売中(絞り込みなし)」に相当します。",
+  "items": [
+    { "label": "本日発売", "nodeId": "2285987051", "verified": true },
+    { "label": "明日発売", "nodeId": "2285988051", "verified": true },
+    { "label": "3日以内に発売", "nodeId": "2285919051", "verified": true },
+    { "label": "7日以内に発売", "nodeId": "2285539051", "verified": true },
+    { "label": "30日以内に発売", "nodeId": "2285541051", "verified": true },
+    { "label": "90日以内に発売", "nodeId": "82839051", "verified": true }
+  ]
+}

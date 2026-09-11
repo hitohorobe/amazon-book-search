@@ -1,0 +1,29 @@
+{
+  "baseUrl": "https://www.amazon.co.jp/s",
+  "searchIndex": "stripbooks",
+  "searchIndexVerified": true,
+  "searchIndexNote": "検証済み: Amazon Creators API の SearchItems(searchIndex: \"Books\", marketplace: www.amazon.co.jp)を呼ぶと、レスポンスの searchResult.searchURL が実際に \"i=stripbooks\" を含む検索結果URLを返すことを複数回確認した(確認日: 2026-09-11)。",
+  "rhKeys": {
+    "category": "n",
+    "publisher": "p_lbr_publishers_browse-bin",
+    "author": "p_27",
+    "priceDetail": "p_36",
+    "pricePreset": "p_n_price_fma",
+    "releaseDate": "p_n_publication_date",
+    "pointsRatio": "p_n_amazon_points_ratio",
+    "pointsEligible": "p_n_amazon_points",
+    "dealType": "p_n_deal_type"
+  },
+  "rhKeysNote": {
+    "category": "要検証だが可能性は高い: Amazon検索共通の階層カテゴリキー。ただし紙書籍のnode id自体はKindle版と別体系。",
+    "publisher": "要検証だが可能性は高い: 書籍検索基盤共通のため、Kindle版と同一キー名の可能性が高い。",
+    "author": "検証済み(間接的): 検索エンジンにインデックスされた実URL(例: rh=n:465392,p_27:村上春樹 / rh=n:465392,p_27:東野圭吾 / rh=n:465392,p_27:湊かなえ)で、n:465392(紙書籍のルート)と組み合わさった状態を複数の実在する著者名で確認済み(確認日: 2026-09-11)。",
+    "priceDetail": "要検証だが可能性は高い: p_36 は価格帯の汎用キーのため、他カテゴリでも共通して使われることが多い。",
+    "pricePreset": "要検証: 価格帯プリセットのnode idはカテゴリ(部門)ごとに異なる場合がある。",
+    "releaseDate": "検証済み(間接的): Kindle版はp_n_dateだが、紙書籍(n:465392)は検索エンジンにインデックスされた実URL(例: rh=n:465392,p_n_publication_date:2285987051)からp_n_publication_dateであることを確認済み。ただしYYYYMMDD-YYYYMMDD形式の範囲指定は、Kindle版のp_n_date範囲指定(実例あり)からの類推であり、p_n_publication_dateでの範囲指定そのものを示す実URLは見つかっていない(要ブラウザ実地確認)。",
+    "pointsRatio": "検証済み(間接的): Kindle版のp_n_amazon_points_ratioとは別体系のnode idを、紙書籍(n:465392)と組み合わさった実URLの一部について確認済み(詳細はdata/pointsRatio.json参照)。",
+    "pointsEligible": "検証済み(間接的): n:465392と直接組み合わさった実URL(rh=n:465392,p_n_amazon_points:3346050051)を確認済み。",
+    "dealType": "検証済み(間接的): n:465392と直接組み合わさった実URL(例: rh=n:465392,p_n_deal_type:10343616051)を確認済み。切り取り式クーポン専用の絞り込みキーは見つかっていない(data/dealTypes.json参照)。"
+  },
+  "defaultTag": ""
+}

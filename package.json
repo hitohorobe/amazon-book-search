@@ -1,0 +1,27 @@
+{
+  "name": "amazon-book-search",
+  "version": "0.2.0",
+  "private": true,
+  "description": "アマゾン書籍検索サポートツール",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "fetch-node": "node scripts/fetch-node.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^30.0.1",
+    "vite": "^5.4.21",
+    "vitest": "^2.1.9"
+  }
+}

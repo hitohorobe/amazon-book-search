@@ -1,0 +1,86 @@
+{
+  "verified": false,
+  "notice": "Kindle本のセール・特集ノード(bbn)です。ラベルはAmazon Creators API (GetBrowseNodes) が返す実際のdisplayNameをそのまま採用しています。並び順は無期限のもの→期限付きのものの順です。開始・終了時期について: GetBrowseNodesにはnodeの作成日時や期限の情報がなく、SearchItemsでこのnode配下の商品を取得し offersV2.listings.dealDetails(通常のタイムセール等に付与される開始/終了時刻)を確認しましたが、これらのセールnodeの商品には付与されておらず取得できませんでした。そのため、ラベル自体に「(9月)」等の年月表記があるものはそれをそのまま残し、それ以外で具体的な期間が分からないものは正直に「(期間不明)」としています。常設に近い6件はKindle版参考ツール(kinsaku.html)のソースや検索エンジンのインデックスから見つけたnode idです。期限付きの10件は、Amazonのマーチャンダイジング階層(Kindleストア > Arborist Merchandising Root > Self Service > Special Features Stores > d322b641-...の100分割シャード、ルートnode id: 23297805051)から、scripts/refresh-sale-nodes.cjs 23297805051 bbnKindle.json 5 を実行してキーワード一致かつnode idが大きい(=新しく作成されたと推測される)順に上位を抽出したものです(直近の実行日: 2026-09-11)。このコマンドは既存itemsの失効確認(存在しなくなったものを自動削除)も同時に行います。新規追加分のラベル末尾は自動では「(要期間確認)」になるため、無期限/期間限定の別や具体的な時期を目視で確認して書き換えてください。node idの若さと作成日時の相関は保証されない経験則です。いずれも存在確認ができても、実際に割引・特集が今も有効かはブラウザでの確認が必要です。「日替わりセール」はrh=n:<id>形式の固定ノードではなく、専用の特設ページ(/kindle-dbs/browse?...)で提供されているため対応できていません。",
+  "items": [
+    {
+      "label": "Kindle本 セール&キャンペーン (無期限)",
+      "nodeId": "3251934051",
+      "verified": false
+    },
+    {
+      "label": "マンガ セール＆キャンペーン (無期限)",
+      "nodeId": "7962654051",
+      "verified": false
+    },
+    {
+      "label": "出版社おすすめ セール＆キャンペーン (無期限)",
+      "nodeId": "8136408051",
+      "verified": false
+    },
+    {
+      "label": "[マンガ]出版社おすすめセール&キャンペーン (無期限)",
+      "nodeId": "24555603051",
+      "verified": false
+    },
+    {
+      "label": "期間限定無料 (無期限)",
+      "nodeId": "8486051051",
+      "verified": false
+    },
+    {
+      "label": "Kindle本 月替わりセール (無期限)",
+      "nodeId": "3305641051",
+      "verified": false
+    },
+    {
+      "label": "オススメの書籍特集（9月） (2026年9月・終了日不明)",
+      "nodeId": "222016774051",
+      "verified": false
+    },
+    {
+      "label": "集英社 人気書籍特集（9月） (2026年9月・終了日不明)",
+      "nodeId": "221973520051",
+      "verified": false
+    },
+    {
+      "label": "秋の特別セール (期間不明)",
+      "nodeId": "222732532051",
+      "verified": false
+    },
+    {
+      "label": "Kindle本 199円セール (期間不明)",
+      "nodeId": "222407505051",
+      "verified": false
+    },
+    {
+      "label": "14周年記念セール (期間不明)",
+      "nodeId": "222520324051",
+      "verified": false
+    },
+    {
+      "label": "ヤンマガデジタル写真集のフェア (期間不明)",
+      "nodeId": "222730017051",
+      "verified": false
+    },
+    {
+      "label": "競馬の日記念 誇り高き錬金術師達に贈る本特集 (期間不明)",
+      "nodeId": "222730016051",
+      "verified": false
+    },
+    {
+      "label": "『鳥物語』配信記念！ 戯言も、忘却探偵も！西尾維新フェア (期間不明)",
+      "nodeId": "222255024051",
+      "verified": false
+    },
+    {
+      "label": "秋の夜長に... 愛が特濃 大人BLフェア (期間不明)",
+      "nodeId": "222252662051",
+      "verified": false
+    },
+    {
+      "label": "「会社四季報」業界地図 新版発売記念 バックナンバー12年分Kindle Unlimited 投入中＆セール (期間不明)",
+      "nodeId": "222096957051",
+      "verified": false
+    }
+  ]
+}

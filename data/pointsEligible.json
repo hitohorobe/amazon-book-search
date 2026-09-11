@@ -1,0 +1,7 @@
+{
+  "verified": true,
+  "notice": "p_n_amazon_points(ポイント還元率ではなく「ポイント対象商品かどうか」の絞り込み)のnode idは、n:465392(本のルート)と直接組み合わさった実URL(rh=n:465392,p_n_amazon_points:3346050051)をGoogle検索のインデックスから複数件確認しました(確認日: 2026-09-11)。",
+  "items": [
+    { "label": "ポイント還元対象のみ", "nodeId": "3346050051", "verified": true }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "verified": true,
+  "notice": "Kindle版参考ツールのソースに埋め込まれていた実際の値です(取得日: 2026-09-11)。Kindle UnlimitedとPrime Readingはrhキー自体が異なる(items[].nodeIdに完全な「キー:値」を保持している)ため、他のプリセットのように|区切りで1つのrhエントリにまとめず、選択したものをそれぞれ独立したrhエントリとして追加します。",
+  "items": [
+    { "label": "Kindle Unlimited", "nodeId": "p_n_feature_nineteen_browse-bin:3169286051", "verified": true },
+    { "label": "Prime Reading", "nodeId": "p_n_special_merchandising_browse-bin:5304495051", "verified": true }
+  ]
+}

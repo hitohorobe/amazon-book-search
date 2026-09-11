@@ -1,0 +1,12 @@
+{
+  "verified": false,
+  "notice": "検索結果の並び順を指定する`s`パラメータは、カテゴリー(`i`)非依存の検索結果ページ共通の仕組みのため、紙の本・Kindle本で同じ値を共用しています。`price-asc-rank`(価格の安い順)・`popularity-rank`(人気順)は、Google検索でインデックスされた実URL(`rh=`と`s=`を組み合わせた電子機器・食品カテゴリーのページ)で実際に使われていることを確認済みです(確認日: 2026-09-12。書籍カテゴリーでの実例は未確認)。`price-desc-rank`(価格の高い順)・`review-rank`(レビュー評価順)・`date-desc-rank`(新着順)は、複数の非公式ブログ記事で繰り返し紹介されている値ですが、実際にAmazon.co.jpが返したURL上での実例は今回見つけられておらず、`sort=`という別パラメータ名を使う記事も混在しているため、確度は低いものとして扱ってください。パラメータなし(関連度順=デフォルト)を含め、`s`は複数指定できず(併記しても先頭の1つだけが有効)、他の`rh`等の絞り込みとは併用できます。",
+  "items": [
+    { "label": "関連度順(デフォルト)", "value": "", "verified": true },
+    { "label": "価格の安い順", "value": "price-asc-rank", "verified": true },
+    { "label": "価格の高い順", "value": "price-desc-rank", "verified": false },
+    { "label": "人気順", "value": "popularity-rank", "verified": true },
+    { "label": "レビューの評価が高い順", "value": "review-rank", "verified": false },
+    { "label": "新着順", "value": "date-desc-rank", "verified": false }
+  ]
+}

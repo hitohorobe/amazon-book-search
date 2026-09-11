@@ -1,0 +1,11 @@
+{
+  "verified": false,
+  "notice": "セール・特集ノード(bbn)は、Amazonマーチャンダイジングが期間限定で作成する特別なnode idで、カテゴリーツリー(GetBrowseNodesの children)には現れず、キャンペーンが終了するとnode id自体が無効化されます。そのためCreators APIで新規に発見することはできず、Google検索でインデックスされた実URL(タイトルに「キャンペーン」「セール」などを含むもの)を探し、見つけたnode idを scripts/fetch-node.js <id> でAmazon側にまだ存在するか(HTTPエラーにならないか)を都度確認する、という運用になります。存在確認ができても、実際に割引・還元が今も有効かどうかはブラウザでの確認が必要です(確認日: 2026-09-11時点でnode id自体は有効)。定期的な更新が前提の機能です。",
+  "items": [
+    { "label": "紙書籍 9月 高価格帯本セール", "nodeId": "221656495051", "verified": false },
+    { "label": "紙書籍まとめ買いキャンペーン 9月 (規約ページ)", "nodeId": "222093553051", "verified": false },
+    { "label": "紙書籍ポイントキャンペーン (最大20%還元・常設)", "nodeId": "201490986051", "verified": false },
+    { "label": "本のまとめ買いキャンペーン (常設)", "nodeId": "10487459051", "verified": false },
+    { "label": "特典付き商品ストア (常設)", "nodeId": "5359819051", "verified": false }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "verified": true,
+  "notice": "p_n_amazon_points_ratio のnode idは、Google検索でインデックスされたAmazon.co.jpの実URLから確認しました(確認日: 2026-09-11)。「3〜5%」は n:465392(本のルート)と直接組み合わさったURLで確認済み。「6〜10%」「11%以上」は他の書籍カテゴリー(語学・辞事典、Amazon Studentなど)と組み合わさったURLでのみ確認できており、価格帯プリセットと同様に部門をまたいだ共通の値と推測していますが、n:465392との組み合わせそのものは未確認です。Kindle版は2〜10%/11〜20%/21〜30%/31%〜という異なる区切りのnode idを使っており、紙書籍とは別体系です。",
+  "items": [
+    { "label": "3〜5%還元", "nodeId": "10476509051", "verified": true },
+    { "label": "6〜10%還元", "nodeId": "10476507051", "verified": false },
+    { "label": "11%以上還元", "nodeId": "10476510051", "verified": false }
+  ]
+}

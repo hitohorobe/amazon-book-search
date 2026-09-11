@@ -1,0 +1,9 @@
+{
+  "verified": true,
+  "notice": "Kindle版参考ツールのソースに埋め込まれていた実際のnode idです(取得日: 2026-09-11)。紙書籍のp_n_publication_dateとは異なり、rhキーはp_n_dateです。「発売中」に対応する専用のnode idは見つかっていません(絞り込みなしの状態が相当します)。",
+  "items": [
+    { "label": "近日発売(30日以内)", "nodeId": "2275273051", "verified": true },
+    { "label": "過去7日", "nodeId": "2275275051", "verified": true },
+    { "label": "過去30日", "nodeId": "2275274051", "verified": true }
+  ]
+}

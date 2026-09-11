@@ -1,0 +1,10 @@
+{
+  "verified": true,
+  "notice": "Kindle版参考ツールのソースに埋め込まれていた実際のnode idです(取得日: 2026-09-11)。紙書籍向けの3段階(3〜5%/6〜10%/11%以上)とは体系が異なります。",
+  "items": [
+    { "label": "2〜10%還元", "nodeId": "10476514051", "verified": true },
+    { "label": "11〜20%還元", "nodeId": "10476512051", "verified": true },
+    { "label": "21〜30%還元", "nodeId": "10476511051", "verified": true },
+    { "label": "31%以上還元", "nodeId": "10476513051", "verified": true }
+  ]
+}

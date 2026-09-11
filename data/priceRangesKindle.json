@@ -1,0 +1,11 @@
+{
+  "verified": true,
+  "notice": "Kindle版参考ツール(https://yapi.ta2o.net/tools/kinsaku.html)のソースに埋め込まれていた実際のnode idです(取得日: 2026-09-11)。紙書籍向けの5段階(0〜1,500円/1,500〜3,000円/3,000〜5,000円/5,000〜10,000円/10,000円以上)とは体系が異なります。当リポジトリで新たにAmazonへアクセスして再検証したものではなく、実際に稼働している参考ツールの値をそのまま転記したものです。",
+  "items": [
+    { "label": "0円〜200円", "nodeId": "10422463051", "verified": true },
+    { "label": "200円〜500円", "nodeId": "10422459051", "verified": true },
+    { "label": "500円〜1,000円", "nodeId": "10422461051", "verified": true },
+    { "label": "1,000円〜2,500円", "nodeId": "10422460051", "verified": true },
+    { "label": "2,500円以上", "nodeId": "10422462051", "verified": true }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "baseUrl": "https://www.amazon.co.jp/s",
+  "searchIndex": "digital-text",
+  "searchIndexVerified": true,
+  "searchIndexNote": "検証済み: Kindle版参考ツール(https://yapi.ta2o.net/tools/kinsaku.html)が実際に使用しているsearchIndexの値。",
+  "rhKeys": {
+    "category": "n",
+    "publisher": "p_lbr_publishers_browse-bin",
+    "author": "p_27",
+    "priceDetail": "p_36",
+    "pricePreset": "p_n_price_fma",
+    "releaseDate": "p_n_date",
+    "pointsRatio": "p_n_amazon_points_ratio"
+  },
+  "rhKeysNote": {
+    "category": "検証済み: Kindle版参考ツールが実際に使用しているキー名(Kindle本のnode idは紙書籍と別体系)。",
+    "publisher": "検証済み: Kindle版参考ツールが実際に使用しているキー名。",
+    "author": "紙書籍(p_27)と同じ書籍検索共通のキーと推測しているが、Kindle向けには未検証。",
+    "priceDetail": "紙書籍(p_36)と同じ価格の汎用キーと推測しているが、Kindle向けには未検証。",
+    "pricePreset": "検証済み: Kindle版参考ツールが実際に使用しているキー名・node id(data/priceRangesKindle.json参照)。",
+    "releaseDate": "検証済み: Kindle版参考ツールが実際に使用しているキー名・node id(data/releasePresetsKindle.json参照)。紙書籍のp_n_publication_dateとは異なる。",
+    "pointsRatio": "検証済み: Kindle版参考ツールが実際に使用しているキー名・node id(data/pointsRatioKindle.json参照)。紙書籍とは別体系のnode id。"
+  },
+  "defaultTag": "",
+  "notice": "pointsEligible(ポイント対象商品のみ)・dealType(値引き・セール)は、紙書籍向けに新たに確認したものでKindle向けの値は未検証のため、Kindleを選択した場合はこれらの絞り込み項目自体を無効化しています。"
+}

@@ -1,0 +1,302 @@
+:root {
+  --md-primary: #6750a4;
+  --md-on-primary: #ffffff;
+  --md-primary-container: #eaddff;
+  --md-on-primary-container: #21005d;
+  --md-surface: #fffbfe;
+  --md-surface-container: #f3edf7;
+  --md-on-surface: #1c1b1f;
+  --md-on-surface-variant: #49454f;
+  --md-outline: #79747e;
+  --md-outline-variant: #cac4d0;
+  --md-warning-container: #fff4e5;
+  --md-on-warning-container: #7a4a00;
+  --md-warning-outline: #f0c98a;
+
+  --md-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.12), 0 1px 3px 1px rgba(0, 0, 0, 0.08);
+  --md-elevation-2: 0 1px 2px rgba(0, 0, 0, 0.14), 0 2px 6px 2px rgba(0, 0, 0, 0.1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 1rem 2rem;
+  background: var(--md-surface-container);
+  color: var(--md-on-surface);
+  font-family: Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+header {
+  padding: 1.5rem 0 0.5rem;
+}
+header h1 { margin: 0 0 0.5rem; font-size: 1.5rem; font-weight: 500; }
+header > div { color: var(--md-on-surface-variant); font-size: 0.9rem; line-height: 1.6; }
+header a { color: var(--md-primary); }
+
+main { margin-top: 0.5rem; }
+footer { margin-top: 1.5rem; padding: 0.5rem; color: var(--md-on-surface-variant); }
+
+input, select, option, button, textarea, label { font-family: inherit; font-size: 0.95rem; }
+::placeholder { color: var(--md-outline); }
+label { display: inline-block; margin: 0.2em 0.6em 0.2em 0; }
+
+/* --- 紙の本/Kindle本切り替え(アコーディオンにせず常に一番上に表示するバー) --- */
+.format-bar {
+  background: var(--md-surface);
+  border-radius: 12px;
+  box-shadow: var(--md-elevation-1);
+  margin-top: 0.75rem;
+  padding: 0.9rem 1rem;
+}
+
+/* --- AccordionSection(テーマ別にグルーピングした、単一カラムの折りたたみセクション) --- */
+.accordion-section {
+  background: var(--md-surface);
+  border-radius: 12px;
+  box-shadow: var(--md-elevation-1);
+  margin-top: 0.75rem;
+  overflow: hidden;
+}
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: none;
+  background: transparent;
+  color: var(--md-on-surface);
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+.accordion-chevron { display: inline-flex; color: var(--md-on-surface-variant); transition: transform 150ms ease; }
+.accordion-chevron-open { transform: rotate(180deg); }
+.accordion-body { padding: 0 1rem 1rem; }
+
+/* --- Field(アコーディオン内の1項目分のサブセクション) --- */
+.field { padding-block: 0.85rem; border-top: 1px solid var(--md-outline-variant); }
+.field:first-child { padding-top: 0; border-top: none; }
+.field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+.field-legend {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--md-on-surface-variant);
+}
+/* --- アウトラインテキストフィールド --- */
+.boxed-field-input {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--md-outline-variant);
+  border-radius: 6px;
+  background: var(--md-surface);
+  color: var(--md-on-surface);
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.boxed-field-input:focus {
+  border-color: var(--md-primary);
+  box-shadow: 0 0 0 1px var(--md-primary);
+}
+/* --- 入力欄・選択欄・チェックボックス群と、そのすぐ右となりのアクションボタン --- */
+.action-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.action-row-content { flex: 1; min-width: 0; }
+
+/* auto-fillのグリッドで列幅を揃え、幅の異なるラベルが並んでもチェックボックスの位置が
+   段ごとにずれないようにする(リキッドレイアウトで折り返し位置が変わっても列は揃ったまま)。 */
+.checkbox-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 0.3rem 0.5rem;
+}
+.checkbox-list label {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  margin: 0;
+  min-width: 0;
+}
+.checkbox-list label { overflow-wrap: anywhere; }
+.price-range-inputs, .date-range-inputs { display: flex; align-items: center; flex-wrap: wrap; gap: 0.3em; }
+
+/* --- ラジオボタン群(並び順など、択一で選ぶ項目)。ラベルが長めなので折り返さないよう縦1列にする --- */
+.radio-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.radio-list label {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* --- アイコンボタン(マテリアルのicon buttonに相当) --- */
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--md-on-surface-variant);
+  cursor: pointer;
+  transition: background-color 120ms ease;
+  flex: none;
+}
+.icon-button:hover:not(:disabled) { background: rgba(0, 0, 0, 0.06); }
+.icon-button:active:not(:disabled) { background: rgba(0, 0, 0, 0.12); }
+.icon-button:disabled { color: var(--md-outline-variant); cursor: default; }
+
+/* --- 塗りつぶしボタン(検索する) --- */
+.search-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--md-primary);
+  color: var(--md-on-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: var(--md-elevation-1);
+  cursor: pointer;
+  transition: box-shadow 120ms ease, background-color 120ms ease;
+}
+.search-button:hover { box-shadow: var(--md-elevation-2); }
+
+.result-panel-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* --- テキストボタン(すべて展開/折りたたむ 等の軽量な操作) --- */
+.text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--md-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+.text-button:hover { background: var(--md-primary-container); }
+
+/* --- チェックボックス・カスケード選択・スライダー --- */
+input[type=checkbox] { accent-color: var(--md-primary); width: 1.05em; height: 1.05em; vertical-align: middle; }
+input[type=date] {
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--md-outline-variant);
+  border-radius: 6px;
+  background: var(--md-surface);
+  color: var(--md-on-surface);
+}
+input[type=date]:focus { outline: none; border-color: var(--md-primary); box-shadow: 0 0 0 1px var(--md-primary); }
+
+#node-selects select {
+  display: block;
+  width: 100%;
+  margin-top: 0.4em;
+  padding: 0.6rem 2rem 0.6rem 0.75rem;
+  border: 1px solid var(--md-outline-variant);
+  border-radius: 6px;
+  background: var(--md-surface) url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2349454F'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 0.5rem center / 1.2em;
+  color: var(--md-on-surface);
+  appearance: none;
+  -webkit-appearance: none;
+}
+#node-selects select:focus { outline: none; border-color: var(--md-primary); box-shadow: 0 0 0 1px var(--md-primary); }
+
+.dual-slider { position: relative; height: 1.6em; margin-top: 0.75em; }
+.dual-slider-track { position: absolute; left: 0; right: 0; top: 50%; height: 4px; margin-top: -2px; background: var(--md-outline-variant); border-radius: 2px; }
+.dual-slider-fill { position: absolute; top: 0; height: 100%; background: var(--md-primary); border-radius: 2px; }
+.dual-slider input[type=range] {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  width: 100%;
+  margin: 0;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.dual-slider input[type=range]::-webkit-slider-runnable-track { height: 4px; background: transparent; }
+.dual-slider input[type=range]::-moz-range-track { height: 4px; background: transparent; border: none; }
+.dual-slider input[type=range]::-webkit-slider-thumb {
+  pointer-events: auto;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px; height: 18px;
+  margin-top: -7px;
+  border-radius: 50%;
+  background: var(--md-primary);
+  border: 2px solid var(--md-surface);
+  box-shadow: var(--md-elevation-1);
+  cursor: pointer;
+}
+.dual-slider input[type=range]::-moz-range-thumb {
+  pointer-events: auto;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--md-primary);
+  border: 2px solid var(--md-surface);
+  box-shadow: var(--md-elevation-1);
+  cursor: pointer;
+}
+
+/* --- 警告バナー(未検証データ) --- */
+.notice {
+  font-size: 0.85rem;
+  color: var(--md-on-warning-container);
+  background: var(--md-warning-container);
+  border: 1px solid var(--md-warning-outline);
+  border-radius: 8px;
+  padding: 0.75em 1em;
+  margin-top: 0.75rem;
+}
+
+/* --- 結果パネル(検索する・URL・HTMLコード)。常時表示(sticky)にするためカードとして自立させる --- */
+.sticky-result {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--md-surface-container);
+  padding-top: 0.5rem;
+  margin: 0 -1rem;
+  padding-inline: 1rem;
+}
+.result-panel {
+  background: var(--md-surface);
+  border-radius: 12px;
+  box-shadow: var(--md-elevation-2);
+  padding: 0.5rem 1rem 1rem;
+}
+.result-panel .field { padding-block: 0.7rem; }
