@@ -103,7 +103,7 @@ test('まとめリンク作成のプレースホルダは紙の本ではISBN例�
 
 test('紙の本/Kindle本はアコーディオンではなく常に一番上に表示され、ラジオボタンで選ぶ', () => {
   const formatField = [...container.querySelectorAll('.field-legend')].find((el) =>
-    el.textContent.includes('紙の本')
+    el.textContent.includes('対象')
   ).closest('.field');
   expect(formatField.closest('.accordion-section')).toBeNull();
   expect(formatField.closest('#params-area')).toBeNull();

@@ -21,21 +21,21 @@
 
 body {
   margin: 0;
-  padding: 0 1rem 2rem;
+  padding: 0 1rem 1.25rem;
   background: var(--md-surface-container);
   color: var(--md-on-surface);
   font-family: Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 header {
-  padding: 1.5rem 0 0.5rem;
+  padding: 1rem 0 0.4rem;
 }
 header h1 { margin: 0 0 0.5rem; font-size: 1.5rem; font-weight: 500; }
 header > div { color: var(--md-on-surface-variant); font-size: 0.9rem; line-height: 1.6; }
 header a { color: var(--md-primary); }
 
 main { margin-top: 0.5rem; }
-footer { margin-top: 1.5rem; padding: 0.5rem; color: var(--md-on-surface-variant); }
+footer { margin-top: 1rem; padding: 0.4rem; color: var(--md-on-surface-variant); }
 
 input, select, option, button, textarea, label { font-family: inherit; font-size: 0.95rem; }
 ::placeholder { color: var(--md-outline); }
@@ -46,16 +46,20 @@ label { display: inline-block; margin: 0.2em 0.6em 0.2em 0; }
   background: var(--md-surface);
   border-radius: 12px;
   box-shadow: var(--md-elevation-1);
-  margin-top: 0.75rem;
-  padding: 0.9rem 1rem;
+  margin-top: 0.5rem;
+  padding: 0.6rem 1rem;
 }
+/* .fieldの:first-childはpadding-topのみを打ち消すため、padding-bottomがそのまま
+   残って上下非対称になる。ここは唯一のFieldなので自前の余白を持たせず、
+   .format-bar自身の(上下対称な)paddingだけに揃える。 */
+.format-bar .field { padding-block: 0; }
 
 /* --- AccordionSection(テーマ別にグルーピングした、単一カラムの折りたたみセクション) --- */
 .accordion-section {
   background: var(--md-surface);
   border-radius: 12px;
   box-shadow: var(--md-elevation-1);
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
   overflow: hidden;
 }
 .accordion-header {
@@ -64,7 +68,7 @@ label { display: inline-block; margin: 0.2em 0.6em 0.2em 0; }
   justify-content: space-between;
   gap: 0.5rem;
   width: 100%;
-  padding: 0.9rem 1rem;
+  padding: 0.6rem 1rem;
   border: none;
   background: transparent;
   color: var(--md-on-surface);
@@ -75,27 +79,48 @@ label { display: inline-block; margin: 0.2em 0.6em 0.2em 0; }
 }
 .accordion-chevron { display: inline-flex; color: var(--md-on-surface-variant); transition: transform 150ms ease; }
 .accordion-chevron-open { transform: rotate(180deg); }
-.accordion-body { padding: 0 1rem 1rem; }
+.accordion-body { padding: 0 1rem 0.5rem; }
 
 /* --- Field(アコーディオン内の1項目分のサブセクション) --- */
-.field { padding-block: 0.85rem; border-top: 1px solid var(--md-outline-variant); }
+/* 項目名(legend)を本体(body)の左に固定幅で並べ、どの項目もテキストボックス等の
+   開始位置(x座標)が揃うようにする。align-items: centerにより、本体がテキスト
+   ボックス1行でもチェックボックスが複数段でも、項目名は本体の高さに応じて自動的に
+   縦中央に揃う(padding等の数値合わせに頼らない)。狭幅では下の@mediaで縦積みに戻す。 */
+.field {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  column-gap: 0.75rem;
+  align-items: center;
+  padding-block: 0.5rem;
+  border-top: 1px solid var(--md-outline-variant);
+}
 .field:first-child { padding-top: 0; border-top: none; }
 .field-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 0.5rem;
-  margin-bottom: 0.6rem;
+  min-width: 0;
 }
 .field-legend {
   font-weight: 500;
   font-size: 0.9rem;
   color: var(--md-on-surface-variant);
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
+.field-body { min-width: 0; }
+
+@media (max-width: 600px) {
+  .field {
+    grid-template-columns: 1fr;
+    row-gap: 0.6rem;
+  }
+}
+
 /* --- アウトラインテキストフィールド --- */
 .boxed-field-input {
   width: 100%;
-  padding: 0.65rem 0.75rem;
+  padding: 0.5rem 0.75rem;
   border: 1px solid var(--md-outline-variant);
   border-radius: 6px;
   background: var(--md-surface);
@@ -211,7 +236,7 @@ label { display: inline-block; margin: 0.2em 0.6em 0.2em 0; }
 .text-button:hover { background: var(--md-primary-container); }
 
 /* --- チェックボックス・カスケード選択・スライダー --- */
-input[type=checkbox] { accent-color: var(--md-primary); width: 1.05em; height: 1.05em; vertical-align: middle; }
+input[type=checkbox], input[type=radio] { accent-color: var(--md-primary); width: 1.05em; height: 1.05em; vertical-align: middle; }
 input[type=date] {
   padding: 0.5rem 0.6rem;
   border: 1px solid var(--md-outline-variant);
@@ -225,7 +250,7 @@ input[type=date]:focus { outline: none; border-color: var(--md-primary); box-sha
   display: block;
   width: 100%;
   margin-top: 0.4em;
-  padding: 0.6rem 2rem 0.6rem 0.75rem;
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
   border: 1px solid var(--md-outline-variant);
   border-radius: 6px;
   background: var(--md-surface) url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2349454F'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 0.5rem center / 1.2em;
@@ -279,8 +304,8 @@ input[type=date]:focus { outline: none; border-color: var(--md-primary); box-sha
   background: var(--md-warning-container);
   border: 1px solid var(--md-warning-outline);
   border-radius: 8px;
-  padding: 0.75em 1em;
-  margin-top: 0.75rem;
+  padding: 0.6em 0.75em;
+  margin-top: 0.5rem;
 }
 
 /* --- 結果パネル(検索する・URL・HTMLコード)。常時表示(sticky)にするためカードとして自立させる --- */
@@ -289,7 +314,7 @@ input[type=date]:focus { outline: none; border-color: var(--md-primary); box-sha
   top: 0;
   z-index: 10;
   background: var(--md-surface-container);
-  padding-top: 0.5rem;
+  padding-top: 0.4rem;
   margin: 0 -1rem;
   padding-inline: 1rem;
 }
@@ -297,6 +322,8 @@ input[type=date]:focus { outline: none; border-color: var(--md-primary); box-sha
   background: var(--md-surface);
   border-radius: 12px;
   box-shadow: var(--md-elevation-2);
-  padding: 0.5rem 1rem 1rem;
+  padding: 0.5rem 1rem;
 }
-.result-panel .field { padding-block: 0.7rem; }
+/* .format-barと同様、唯一のFieldなので自前の余白は持たせず.result-panel側の
+   (上下対称な)paddingだけに揃える。 */
+.result-panel .field { padding-block: 0; }
