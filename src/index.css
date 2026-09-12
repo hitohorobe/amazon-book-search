@@ -144,7 +144,7 @@ label { display: inline-block; margin: 0.2em 0.6em 0.2em 0; }
    段ごとにずれないようにする(リキッドレイアウトで折り返し位置が変わっても列は揃ったまま)。 */
 .checkbox-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
   gap: 0.3rem 0.5rem;
 }
 .checkbox-list label {
