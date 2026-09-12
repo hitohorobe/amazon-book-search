@@ -83,7 +83,10 @@ cp .env.example env
 
 ## デプロイ
 
-- `.github/workflows/deploy.yml`により、mainブランチへのpushで`dist/`以下を自動デプロイ
+- Settings → Pages → Source は「Deploy from a branch」(`gh-pages` / root)にしている
+- `.github/workflows/deploy.yml`により、mainブランチへのpushで`dist/`以下を`gh-pages`ブランチへ自動デプロイする(`JamesIves/github-pages-deploy-action`)
+- `.github/workflows/pr-preview.yml`により、PRを作成・更新するとテスト・ビルドが自動で実行され(PR時のCIを兼ねる)、`gh-pages`ブランチの`pr-preview/<PR番号>/`にプレビューが公開される。プレビューURLはPRに自動でコメントされ、PRを閉じると自動で削除される(`rossjrw/pr-preview-action`)
+- フォークからのPRは権限の都合上プレビューを作成できない(同一リポジトリ内のブランチからのPRのみ対応)
 
 
 ## 既知の制限
