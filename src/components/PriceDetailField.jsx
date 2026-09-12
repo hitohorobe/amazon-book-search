@@ -26,6 +26,7 @@ export default function PriceDetailField({ low, high, onChange }) {
           <input
             type="text"
             id="input-price_low"
+            className="price-input"
             value={low}
             onChange={(e) => onChange({ low: e.target.value, high })}
           />
@@ -33,6 +34,7 @@ export default function PriceDetailField({ low, high, onChange }) {
           <input
             type="text"
             id="input-price_high"
+            className="price-input"
             value={high}
             onChange={(e) => onChange({ low, high: e.target.value })}
           />

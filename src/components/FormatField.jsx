@@ -4,7 +4,7 @@ import Field from './Field.jsx';
 // ジャンルツリーなど)ため、常にどちらか一方だけを選べるラジオボタンにする。
 export default function FormatField({ value, onChange }) {
   return (
-    <Field legend="対象(紙の本 / Kindle本)">
+    <Field legend="対象">
       <div className="checkbox-list">
         <label>
           <input type="radio" name="format" checked={value === 'paper'} onChange={() => onChange('paper')} />

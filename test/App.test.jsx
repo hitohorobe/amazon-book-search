@@ -103,7 +103,7 @@ test('まとめリンク作成のプレースホルダは紙の本ではISBN例�
 
 test('紙の本/Kindle本はアコーディオンではなく常に一番上に表示され、ラジオボタンで選ぶ', () => {
   const formatField = [...container.querySelectorAll('.field-legend')].find((el) =>
-    el.textContent.includes('紙の本')
+    el.textContent.includes('対象')
   ).closest('.field');
   expect(formatField.closest('.accordion-section')).toBeNull();
   expect(formatField.closest('#params-area')).toBeNull();
@@ -278,7 +278,7 @@ test('並び順をラジオボタンで選ぶとsパラメータが付き、関�
 
 test('「すべて展開」ボタンで全アコーディオンが開き、再度押すと全て閉じる(初期状態は検索クエリ/絞り込みの2つだけ開いている)', () => {
   function toggleAllButton() {
-    return [...container.querySelectorAll('.text-button')].find((b) => b.textContent.includes('すべて'));
+    return container.querySelector('.float-toggle-button');
   }
 
   expect(container.querySelectorAll('.accordion-body')).toHaveLength(2);
@@ -291,6 +291,17 @@ test('「すべて展開」ボタンで全アコーディオンが開き、再�
   act(() => toggleAllButton().click());
   expect(container.querySelectorAll('.accordion-body')).toHaveLength(0);
   expect(toggleAllButton().textContent).toContain('すべて展開');
+});
+
+test('「トップへ戻る」ボタンがすべて展開/折りたたむボタンと同じフローティング領域にある', () => {
+  const scrollTopButton = container.querySelector('.float-icon-button');
+  const toggleAllButton = container.querySelector('.float-toggle-button');
+  expect(scrollTopButton.closest('.float-button-group')).toBe(toggleAllButton.closest('.float-button-group'));
+
+  const originalScrollTo = window.scrollTo;
+  window.scrollTo = () => {};
+  act(() => scrollTopButton.click());
+  window.scrollTo = originalScrollTo;
 });
 
 describe('紙の本 / Kindle本の切り替え', () => {
