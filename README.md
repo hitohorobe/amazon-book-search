@@ -52,7 +52,7 @@ npm run build
 npm run preview
 ```
 
-`data/*.json` は `src/App.jsx` から直接importしてビルド時にバンドルする
+`data/*.json` は `src/App.jsx` から直接importしてビルド時にバンドルする  
 実行時に外部データのfetch等は行わない
 
 ## Amazon Creators APIによるnode・ジャンルの取得
