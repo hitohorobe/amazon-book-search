@@ -157,6 +157,23 @@ label { display: inline-block; margin: 0.2em 0.6em 0.2em 0; }
 .checkbox-list label { overflow-wrap: anywhere; }
 .price-range-inputs, .date-range-inputs { display: flex; align-items: center; flex-wrap: wrap; gap: 0.3em; }
 
+/* 価格の詳細指定(下限・上限)は高々6桁の数値しか入力しないため、他のテキスト欄
+   (.boxed-field-input、幅100%)とは別に、その分だけの幅を持つ専用スタイルにする。 */
+.price-input {
+  width: calc(8ch + 1rem);
+  padding: 0.5rem 0.5rem;
+  border: 1px solid var(--md-outline-variant);
+  border-radius: 6px;
+  background: var(--md-surface);
+  color: var(--md-on-surface);
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.price-input:focus {
+  border-color: var(--md-primary);
+  box-shadow: 0 0 0 1px var(--md-primary);
+}
+
 /* --- ラジオボタン群(並び順など、択一で選ぶ項目)。ラベルが長めなので折り返さないよう縦1列にする --- */
 .radio-list {
   display: flex;
