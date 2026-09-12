@@ -191,18 +191,19 @@ label { display: inline-block; margin: 0.2em 0.6em 0.2em 0; }
 .icon-button:active:not(:disabled) { background: rgba(0, 0, 0, 0.12); }
 .icon-button:disabled { color: var(--md-outline-variant); cursor: default; }
 
-/* --- 塗りつぶしボタン(検索する) --- */
+/* --- 塗りつぶしボタン(検索する)。URL入力欄のすぐ右となりに置く想定のコンパクトなサイズ --- */
 .search-button {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  margin: 1rem 0;
-  padding: 0.7rem 1.5rem;
+  gap: 0.4rem;
+  flex: none;
+  margin: 0;
+  padding: 0.5rem 1rem;
   border: none;
   border-radius: 999px;
   background: var(--md-primary);
   color: var(--md-on-primary);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
   box-shadow: var(--md-elevation-1);
   cursor: pointer;
@@ -210,30 +211,50 @@ label { display: inline-block; margin: 0.2em 0.6em 0.2em 0; }
 }
 .search-button:hover { box-shadow: var(--md-elevation-2); }
 
-.result-panel-top {
+/* --- フローティングのボタン群(トップへ戻る/すべて展開・折りたたむ)。スクロール位置に
+   よらず常に画面右下に固定表示する(URLのコピー等と同様、常に手が届く操作にするため)。 --- */
+.float-button-group {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 20;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
   gap: 0.5rem;
 }
-
-/* --- テキストボタン(すべて展開/折りたたむ 等の軽量な操作) --- */
-.text-button {
+.float-toggle-button {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  padding: 0.5rem 0.75rem;
+  padding: 0.6rem 1rem;
   border: none;
   border-radius: 999px;
-  background: transparent;
+  background: var(--md-surface);
   color: var(--md-primary);
   font-size: 0.9rem;
   font-weight: 500;
+  box-shadow: var(--md-elevation-2);
   cursor: pointer;
-  transition: background-color 120ms ease;
+  transition: box-shadow 120ms ease, background-color 120ms ease;
 }
-.text-button:hover { background: var(--md-primary-container); }
+.float-toggle-button:hover { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18), 0 4px 10px 2px rgba(0, 0, 0, 0.12); }
+
+.float-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: none;
+  border: none;
+  border-radius: 50%;
+  background: var(--md-surface);
+  color: var(--md-primary);
+  box-shadow: var(--md-elevation-2);
+  cursor: pointer;
+  transition: box-shadow 120ms ease, background-color 120ms ease;
+}
+.float-icon-button:hover { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18), 0 4px 10px 2px rgba(0, 0, 0, 0.12); }
 
 /* --- チェックボックス・カスケード選択・スライダー --- */
 input[type=checkbox], input[type=radio] { accent-color: var(--md-primary); width: 1.05em; height: 1.05em; vertical-align: middle; }
