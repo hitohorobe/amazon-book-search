@@ -55,7 +55,7 @@ function bbnMapFor(bbnItems) {
   return Object.fromEntries(bbnItems.map((i) => [i.label, i.nodeId]));
 }
 
-const ACCORDION_TITLES = ['検索・絞り込み', '価格', '発売日', 'ポイント・セール', '並び順', 'アソシエイトID'];
+const ACCORDION_TITLES = ['検索・絞り込み', '価格・ポイント・セール', '発売日', '並び順', 'アソシエイトID'];
 
 const initialOpenSections = Object.fromEntries(
   ACCORDION_TITLES.map((title) => [title, title === '検索・絞り込み'])
@@ -192,7 +192,11 @@ export default function App() {
             </div>
           </AccordionSection>
 
-          <AccordionSection title="価格" open={openSections['価格']} onToggle={() => toggleSection('価格')}>
+          <AccordionSection
+            title="価格・ポイント・セール"
+            open={openSections['価格・ポイント・セール']}
+            onToggle={() => toggleSection('価格・ポイント・セール')}
+          >
             <CheckboxGroup
               legend="価格"
               name="input-price_range"
@@ -206,26 +210,7 @@ export default function App() {
               high={form.priceHigh}
               onChange={({ low, high }) => patch({ priceLow: low, priceHigh: high })}
             />
-          </AccordionSection>
 
-          <AccordionSection title="発売日" open={openSections['発売日']} onToggle={() => toggleSection('発売日')}>
-            <CheckboxGroup
-              legend="発売日"
-              name="input-release_preset"
-              items={active.releasePresets.items}
-              checkedIds={form.checkedReleasePresetIds}
-              onChange={(checkedReleasePresetIds) => patch({ checkedReleasePresetIds })}
-            />
-
-            <DateRangeField
-              legend="発売日"
-              from={form.dateFrom}
-              to={form.dateTo}
-              onChange={({ from, to }) => patch({ dateFrom: from, dateTo: to })}
-            />
-          </AccordionSection>
-
-          <AccordionSection title="ポイント・セール" open={openSections['ポイント・セール']} onToggle={() => toggleSection('ポイント・セール')}>
             <CheckboxGroup
               legend="ポイント還元率"
               name="input-points_ratio"
@@ -270,6 +255,23 @@ export default function App() {
               options={active.bbn.items.map((i) => i.label)}
               value={form.bbnLabel}
               onChange={(bbnLabel) => patch({ bbnLabel })}
+            />
+          </AccordionSection>
+
+          <AccordionSection title="発売日" open={openSections['発売日']} onToggle={() => toggleSection('発売日')}>
+            <CheckboxGroup
+              legend="発売日"
+              name="input-release_preset"
+              items={active.releasePresets.items}
+              checkedIds={form.checkedReleasePresetIds}
+              onChange={(checkedReleasePresetIds) => patch({ checkedReleasePresetIds })}
+            />
+
+            <DateRangeField
+              legend="発売日（日付）"
+              from={form.dateFrom}
+              to={form.dateTo}
+              onChange={({ from, to }) => patch({ dateFrom: from, dateTo: to })}
             />
           </AccordionSection>
 

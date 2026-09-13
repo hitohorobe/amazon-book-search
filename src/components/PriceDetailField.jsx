@@ -15,40 +15,42 @@ export default function PriceDetailField({ low, high, onChange }) {
   const sliderHigh = high === '' ? SLIDER_MAX : clamp(Number(high), SLIDER_MIN, SLIDER_MAX);
 
   return (
-    <Field legend="価格">
+    <Field legend="価格（1円単位）">
       <ActionRow
         icon="close"
         label="クリア"
         onClick={() => onChange({ low: '', high: '' })}
         disabled={low === '' && high === ''}
       >
-        <div className="price-range-inputs">
-          <input
-            type="text"
-            id="input-price_low"
-            className="price-input"
-            value={low}
-            onChange={(e) => onChange({ low: e.target.value, high })}
+        <div className="price-detail-row">
+          <div className="price-range-inputs">
+            <input
+              type="text"
+              id="input-price_low"
+              className="price-input"
+              value={low}
+              onChange={(e) => onChange({ low: e.target.value, high })}
+            />
+            円 〜{' '}
+            <input
+              type="text"
+              id="input-price_high"
+              className="price-input"
+              value={high}
+              onChange={(e) => onChange({ low, high: e.target.value })}
+            />
+            円
+          </div>
+          <PriceRangeSlider
+            min={SLIDER_MIN}
+            max={SLIDER_MAX}
+            step={SLIDER_STEP}
+            low={sliderLow}
+            high={sliderHigh}
+            onChange={({ low: newLow, high: newHigh }) => onChange({ low: String(newLow), high: String(newHigh) })}
           />
-          円 〜{' '}
-          <input
-            type="text"
-            id="input-price_high"
-            className="price-input"
-            value={high}
-            onChange={(e) => onChange({ low, high: e.target.value })}
-          />
-          円
         </div>
       </ActionRow>
-      <PriceRangeSlider
-        min={SLIDER_MIN}
-        max={SLIDER_MAX}
-        step={SLIDER_STEP}
-        low={sliderLow}
-        high={sliderHigh}
-        onChange={({ low: newLow, high: newHigh }) => onChange({ low: String(newLow), high: String(newHigh) })}
-      />
     </Field>
   );
 }

@@ -170,6 +170,12 @@ label { display: inline-block; margin: 0.2em 0.6em 0.2em 0; }
 .checkbox-list label { overflow-wrap: anywhere; }
 .price-range-inputs, .date-range-inputs { display: flex; align-items: center; flex-wrap: wrap; gap: 0.3em; }
 
+/* 価格ボックスの右側が空いてデッドスペースになるため、スライダーをその横に
+   並べて埋める。幅が足りない狭幅では自動的に折り返して縦積みに戻る。 */
+.price-detail-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+.price-detail-row .price-range-inputs { flex: none; }
+.price-detail-row .dual-slider { flex: 1 1 10rem; min-width: 10rem; }
+
 /* 価格の詳細指定(下限・上限)は高々6桁の数値しか入力しないため、他のテキスト欄
    (.boxed-field-input、幅100%)とは別に、その分だけの幅を持つ専用スタイルにする。 */
 .price-input {

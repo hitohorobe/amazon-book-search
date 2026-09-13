@@ -283,7 +283,7 @@ test('「すべて展開」ボタンで全アコーディオンが開き、再�
   expect(toggleAllButton().textContent).toContain('すべて展開');
 
   act(() => toggleAllButton().click());
-  expect(container.querySelectorAll('.accordion-body')).toHaveLength(6);
+  expect(container.querySelectorAll('.accordion-body')).toHaveLength(5);
   expect(toggleAllButton().textContent).toContain('すべて折りたたむ');
 
   act(() => toggleAllButton().click());
