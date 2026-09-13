@@ -303,10 +303,18 @@ input[type=date] {
 }
 input[type=date]:focus { outline: none; border-color: var(--md-primary); box-shadow: 0 0 0 1px var(--md-primary); }
 
+/* 選択するたびに<select>が右へ1つずつ追加されていくカスケード選択。
+   .two-col-groupが2カラムになる境目(900px)とブレークポイントを揃えて、
+   検索・絞り込みが2カラムの間は常に横並び、1カラムの間は常に縦積みにする
+   (列幅そのもので判定すると、2カラムに切り替わった直後の最も狭いタイミングで
+   縦積みに戻ってしまい、2カラム中に縦積みが混じって見えてしまうため)。 */
+#node-selects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
 #node-selects select {
-  display: block;
   width: 100%;
-  margin-top: 0.4em;
   padding: 0.5rem 2rem 0.5rem 0.75rem;
   border: 1px solid var(--md-outline-variant);
   border-radius: 6px;
@@ -316,6 +324,11 @@ input[type=date]:focus { outline: none; border-color: var(--md-primary); box-sha
   -webkit-appearance: none;
 }
 #node-selects select:focus { outline: none; border-color: var(--md-primary); box-shadow: 0 0 0 1px var(--md-primary); }
+
+@media (min-width: 900px) {
+  #node-selects { flex-direction: row; }
+  #node-selects select { flex: 1 1 0; min-width: 0; }
+}
 
 .dual-slider { position: relative; height: 1.6em; margin-top: 0.75em; }
 .dual-slider-track { position: absolute; left: 0; right: 0; top: 50%; height: 4px; margin-top: -2px; background: var(--md-outline-variant); border-radius: 2px; }
