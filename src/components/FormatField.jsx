@@ -5,7 +5,7 @@ import Field from './Field.jsx';
 export default function FormatField({ value, onChange }) {
   return (
     <Field legend="対象">
-      <div className="checkbox-list">
+      <div className="format-options">
         <label>
           <input type="radio" name="format" checked={value === 'paper'} onChange={() => onChange('paper')} />
           紙の本

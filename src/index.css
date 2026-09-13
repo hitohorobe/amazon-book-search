@@ -53,6 +53,9 @@ label { display: inline-block; margin: 0.2em 0.6em 0.2em 0; }
    残って上下非対称になる。ここは唯一のFieldなので自前の余白を持たせず、
    .format-bar自身の(上下対称な)paddingだけに揃える。 */
 .format-bar .field { padding-block: 0; }
+/* 紙の本/Kindle本はどちらか一方を選ぶ択一操作で常に2択だけなので、.checkbox-listの
+   auto-fillのような折り返しは不要。幅を狭くしても縦積みにならないよう常に横並びにする。 */
+.format-options { display: flex; gap: 1rem; flex-wrap: nowrap; }
 
 /* --- AccordionSection(テーマ別にグルーピングした、単一カラムの折りたたみセクション) --- */
 .accordion-section {
