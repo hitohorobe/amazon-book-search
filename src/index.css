@@ -53,6 +53,9 @@ label { display: inline-block; margin: 0.2em 0.6em 0.2em 0; }
    残って上下非対称になる。ここは唯一のFieldなので自前の余白を持たせず、
    .format-bar自身の(上下対称な)paddingだけに揃える。 */
 .format-bar .field { padding-block: 0; }
+/* 紙の本/Kindle本はどちらか一方を選ぶ択一操作で常に2択だけなので、.checkbox-listの
+   auto-fillのような折り返しは不要。幅を狭くしても縦積みにならないよう常に横並びにする。 */
+.format-options { display: flex; gap: 1rem; flex-wrap: nowrap; }
 
 /* --- AccordionSection(テーマ別にグルーピングした、単一カラムの折りたたみセクション) --- */
 .accordion-section {
@@ -80,6 +83,19 @@ label { display: inline-block; margin: 0.2em 0.6em 0.2em 0; }
 .accordion-chevron { display: inline-flex; color: var(--md-on-surface-variant); transition: transform 150ms ease; }
 .accordion-chevron-open { transform: rotate(180deg); }
 .accordion-body { padding: 0 1rem 0.5rem; }
+
+/* --- 検索クエリ/絞り込みの2カラム化。テキスト欄がアコーディオン幅いっぱいに
+   広がってデッドスペースが目立つため、狭幅では1列(従来通り縦積み)、
+   広幅では2列にしてスペースを活かす。列内の最初のfieldはグローバルな
+   .field:first-childにより自動的に区切り線なしになる(親を問わないセレクタのため)。 */
+.two-col-group {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 2rem;
+}
+@media (min-width: 900px) {
+  .two-col-group { grid-template-columns: 1fr 1fr; }
+}
 
 /* --- Field(アコーディオン内の1項目分のサブセクション) --- */
 /* 項目名(legend)を本体(body)の左に固定幅で並べ、どの項目もテキストボックス等の
@@ -156,6 +172,12 @@ label { display: inline-block; margin: 0.2em 0.6em 0.2em 0; }
 }
 .checkbox-list label { overflow-wrap: anywhere; }
 .price-range-inputs, .date-range-inputs { display: flex; align-items: center; flex-wrap: wrap; gap: 0.3em; }
+
+/* 価格ボックスの右側が空いてデッドスペースになるため、スライダーをその横に
+   並べて埋める。幅が足りない狭幅では自動的に折り返して縦積みに戻る。 */
+.price-detail-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+.price-detail-row .price-range-inputs { flex: none; }
+.price-detail-row .dual-slider { flex: 1 1 10rem; min-width: 10rem; }
 
 /* 価格の詳細指定(下限・上限)は高々6桁の数値しか入力しないため、他のテキスト欄
    (.boxed-field-input、幅100%)とは別に、その分だけの幅を持つ専用スタイルにする。 */
@@ -284,10 +306,18 @@ input[type=date] {
 }
 input[type=date]:focus { outline: none; border-color: var(--md-primary); box-shadow: 0 0 0 1px var(--md-primary); }
 
+/* 選択するたびに<select>が右へ1つずつ追加されていくカスケード選択。
+   .two-col-groupが2カラムになる境目(900px)とブレークポイントを揃えて、
+   検索・絞り込みが2カラムの間は常に横並び、1カラムの間は常に縦積みにする
+   (列幅そのもので判定すると、2カラムに切り替わった直後の最も狭いタイミングで
+   縦積みに戻ってしまい、2カラム中に縦積みが混じって見えてしまうため)。 */
+#node-selects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
 #node-selects select {
-  display: block;
   width: 100%;
-  margin-top: 0.4em;
   padding: 0.5rem 2rem 0.5rem 0.75rem;
   border: 1px solid var(--md-outline-variant);
   border-radius: 6px;
@@ -297,6 +327,11 @@ input[type=date]:focus { outline: none; border-color: var(--md-primary); box-sha
   -webkit-appearance: none;
 }
 #node-selects select:focus { outline: none; border-color: var(--md-primary); box-shadow: 0 0 0 1px var(--md-primary); }
+
+@media (min-width: 900px) {
+  #node-selects { flex-direction: row; }
+  #node-selects select { flex: 1 1 0; min-width: 0; }
+}
 
 .dual-slider { position: relative; height: 1.6em; margin-top: 0.75em; }
 .dual-slider-track { position: absolute; left: 0; right: 0; top: 50%; height: 4px; margin-top: -2px; background: var(--md-outline-variant); border-radius: 2px; }

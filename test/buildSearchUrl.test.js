@@ -137,13 +137,13 @@ test('値引き・セールの種類はp_n_deal_typeになる', () => {
   assert.equal(rh, 'p_n_deal_type:10343616051');
 });
 
-test('完全一致チェックがオフならkはそのまま', () => {
-  const url = buildSearchUrl({ k: '異世界', exactMatch: false }, config);
+test('kはそのままURLに使われる', () => {
+  const url = buildSearchUrl({ k: '異世界' }, config);
   assert.equal(new URL(url).searchParams.get('k'), '異世界');
 });
 
-test('完全一致チェックがオンならkを""で囲む', () => {
-  const url = buildSearchUrl({ k: '異世界 転生', exactMatch: true }, config);
+test('""で囲んで入力すれば、囲んだ形のままkになる(完全一致検索)', () => {
+  const url = buildSearchUrl({ k: '"異世界 転生"' }, config);
   assert.equal(new URL(url).searchParams.get('k'), '"異世界 転生"');
 });
 

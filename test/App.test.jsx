@@ -63,13 +63,11 @@ test('検索クエリを入力するとkが付与される', () => {
   expect(outputUrl()).toContain('k=%E7%95%B0%E4%B8%96%E7%95%8C');
 });
 
-test('完全一致チェックをオンにするとkが""で囲まれる', () => {
+test('検索クエリのプレースホルダーで完全一致検索(""で囲む)の入力方法を案内している', () => {
   const kInput = container.querySelector('#input-k');
-  act(() => fireInput(kInput, '異世界'));
+  expect(kInput.placeholder).toContain('"..."');
 
-  const checkbox = kInput.closest('.field').querySelector('input[type=checkbox]');
-  act(() => checkbox.click());
-
+  act(() => fireInput(kInput, '"異世界"'));
   const k = decodeURIComponent(new URL(outputUrl()).searchParams.get('k'));
   expect(k).toBe('"異世界"');
 });
@@ -141,7 +139,6 @@ test('カテゴリーのCLEARで選択状態と<select>の数が初期化され�
 });
 
 test('価格スライダーの左つまみを動かすとテキストとURLが連動する', () => {
-  act(() => openAccordion('価格'));
   const [lowSlider] = container.querySelectorAll('.dual-slider input[type=range]');
   act(() => fireInput(lowSlider, '1500'));
 
@@ -150,7 +147,6 @@ test('価格スライダーの左つまみを動かすとテキストとURLが�
 });
 
 test('価格テキストにスライダー上限(10,000円)を超える値を直接入力できる', () => {
-  act(() => openAccordion('価格'));
   const highInput = container.querySelector('#input-price_high');
   act(() => fireInput(highInput, '250000'));
 
@@ -186,7 +182,6 @@ test('著者名を入力するとp_27としてrhに反映される', () => {
 });
 
 test('ポイント還元率・ポイント対象・値引き/セールのチェックボックスがrhに反映される', () => {
-  act(() => openAccordion('ポイント・セール'));
   act(() => container.querySelector('input[name=input-points_ratio]').click());
   act(() => container.querySelector('input[name=input-points_eligible]').click());
   act(() => container.querySelector('input[name=input-deal_type]').click());
@@ -200,7 +195,7 @@ test('ポイント還元率・ポイント対象・値引き/セールのチェ�
 test('検索クエリ欄: クリアボタンは入力欄のすぐ右となりにあり、空のときは無効・入力すると有効になる', () => {
   const kInput = container.querySelector('#input-k');
   const row = kInput.closest('.action-row');
-  const clearIcon = row.querySelector('.icon-button');
+  const clearIcon = row.querySelector('[aria-label="クリア"]');
 
   // ボックス内(input自体の子孫)ではなく、ボックスの外(すぐ右となり)にある
   expect(kInput.contains(clearIcon)).toBe(false);
@@ -223,8 +218,6 @@ test('URL欄のコピーボタンはボックスのすぐ右となりにある(�
 });
 
 test('価格・発売日・ジャンル・プリセット群にもクリアボタンがある', () => {
-  act(() => openAccordion('価格'));
-  act(() => openAccordion('発売日'));
   const legends = [...container.querySelectorAll('.field-legend')].map((el) => el.textContent);
   for (const legend of ['ジャンル', '価格', '発売日']) {
     expect(legends).toContain(legend);
@@ -235,14 +228,12 @@ test('価格・発売日・ジャンル・プリセット群にもクリアボ�
 });
 
 test('発売日プリセットのチェックボックスをクリックするとrhに追加される', () => {
-  act(() => openAccordion('発売日'));
   const checkbox = container.querySelector('input[name=input-release_preset]');
   act(() => checkbox.click());
   expect(outputUrl()).toContain('p_n_publication_date%3A');
 });
 
 test('価格帯プリセットは複数選択で|区切りになる', () => {
-  act(() => openAccordion('価格'));
   const checkboxes = container.querySelectorAll('input[name=input-price_range]');
   act(() => checkboxes[0].click());
   act(() => checkboxes[1].click());
@@ -251,7 +242,6 @@ test('価格帯プリセットは複数選択で|区切りになる', () => {
 });
 
 test('セール・特集(bbn)はrhと独立したトップレベルパラメータになる', () => {
-  act(() => openAccordion('ポイント・セール'));
   const bbnInput = container.querySelector('#input-bbn');
   const firstOptionLabel = container.querySelector('#input-bbn-list option').value;
   act(() => fireInput(bbnInput, firstOptionLabel));
@@ -276,16 +266,16 @@ test('並び順をラジオボタンで選ぶとsパラメータが付き、関�
   expect(new URL(outputUrl()).searchParams.has('s')).toBe(false);
 });
 
-test('「すべて展開」ボタンで全アコーディオンが開き、再度押すと全て閉じる(初期状態は検索クエリ/絞り込みの2つだけ開いている)', () => {
+test('「すべて展開」ボタンで全アコーディオンが開き、再度押すと全て閉じる(初期状態は検索・絞り込み/価格・ポイント・セール/発売日が開いている)', () => {
   function toggleAllButton() {
     return container.querySelector('.float-toggle-button');
   }
 
-  expect(container.querySelectorAll('.accordion-body')).toHaveLength(2);
+  expect(container.querySelectorAll('.accordion-body')).toHaveLength(3);
   expect(toggleAllButton().textContent).toContain('すべて展開');
 
   act(() => toggleAllButton().click());
-  expect(container.querySelectorAll('.accordion-body')).toHaveLength(7);
+  expect(container.querySelectorAll('.accordion-body')).toHaveLength(5);
   expect(toggleAllButton().textContent).toContain('すべて折りたたむ');
 
   act(() => toggleAllButton().click());
@@ -351,7 +341,6 @@ describe('紙の本 / Kindle本の切り替え', () => {
   });
 
   test('Kindle選択時は「ポイント対象」「値引き・セール」が非表示になり、「読み放題」が表示される', () => {
-    act(() => openAccordion('ポイント・セール'));
     act(() => checkboxFor('Kindle本').click());
     expect(container.querySelector('input[name=input-points_eligible]')).toBeNull();
     expect(container.querySelector('input[name=input-deal_type]')).toBeNull();
@@ -359,7 +348,6 @@ describe('紙の本 / Kindle本の切り替え', () => {
   });
 
   test('Kindle選択時はbbnの候補一覧が紙とは別のもの(Kindle本向け)に差し替わる', () => {
-    act(() => openAccordion('ポイント・セール'));
     const bbnInputBefore = container.querySelector('#input-bbn');
     expect(bbnInputBefore).not.toBeNull();
     const paperOptions = [...container.querySelectorAll('#input-bbn-list option')].map((o) => o.value);
@@ -373,7 +361,6 @@ describe('紙の本 / Kindle本の切り替え', () => {
 
   test('読み放題(Kindle Unlimited)はrhの独立したエントリとして追加される', () => {
     act(() => checkboxFor('Kindle本').click());
-    act(() => openAccordion('ポイント・セール'));
     const checkbox = container.querySelector('input[name=input-reading_program]');
     act(() => checkbox.click());
     const rh = decodeURIComponent(new URL(outputUrl()).searchParams.get('rh'));
@@ -382,7 +369,6 @@ describe('紙の本 / Kindle本の切り替え', () => {
 
   test('Kindleのポイント還元率プリセット(紙とは別体系)が使える', () => {
     act(() => checkboxFor('Kindle本').click());
-    act(() => openAccordion('ポイント・セール'));
     const checkbox = container.querySelector('input[name=input-points_ratio]');
     act(() => checkbox.click());
     const rh = decodeURIComponent(new URL(outputUrl()).searchParams.get('rh'));
