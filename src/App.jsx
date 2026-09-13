@@ -57,8 +57,10 @@ function bbnMapFor(bbnItems) {
 
 const ACCORDION_TITLES = ['検索・絞り込み', '価格・ポイント・セール', '発売日', '並び順', 'アソシエイトID'];
 
+const DEFAULT_OPEN_TITLES = ['検索・絞り込み', '価格・ポイント・セール', '発売日'];
+
 const initialOpenSections = Object.fromEntries(
-  ACCORDION_TITLES.map((title) => [title, title === '検索・絞り込み'])
+  ACCORDION_TITLES.map((title) => [title, DEFAULT_OPEN_TITLES.includes(title)])
 );
 
 const initialForm = {
