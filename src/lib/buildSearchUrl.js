@@ -34,8 +34,7 @@ export function buildSearchUrl(form, config) {
   params.set('i', config.searchIndex);
 
   if (form.k) {
-    const k = form.k.trim();
-    params.set('k', form.exactMatch ? `"${k}"` : k);
+    params.set('k', form.k.trim());
   }
 
   const hiddenKeywords = buildHiddenKeywords(form);

@@ -64,7 +64,6 @@ const initialOpenSections = Object.fromEntries(
 const initialForm = {
   format: 'paper',
   k: '',
-  exactMatch: false,
   minusKeywords: '',
   bundleAsins: '',
   nodeId: null,
@@ -143,16 +142,13 @@ export default function App() {
           <AccordionSection title="検索・絞り込み" open={openSections['検索・絞り込み']} onToggle={() => toggleSection('検索・絞り込み')}>
             <div className="two-col-group">
               <div className="two-col">
-                <ClearableTextField legend="検索クエリ" id="input-k" value={form.k} onChange={(k) => patch({ k })}>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={form.exactMatch}
-                      onChange={(e) => patch({ exactMatch: e.target.checked })}
-                    />
-                    完全一致で検索(クエリを&quot;&quot;で囲む)
-                  </label>
-                </ClearableTextField>
+                <ClearableTextField
+                  legend="検索クエリ"
+                  id="input-k"
+                  value={form.k}
+                  onChange={(k) => patch({ k })}
+                  placeholder='完全一致で検索する場合は "..." のように囲む'
+                />
 
                 <ClearableTextField
                   legend="マイナス検索"

@@ -63,13 +63,11 @@ test('検索クエリを入力するとkが付与される', () => {
   expect(outputUrl()).toContain('k=%E7%95%B0%E4%B8%96%E7%95%8C');
 });
 
-test('完全一致チェックをオンにするとkが""で囲まれる', () => {
+test('検索クエリのプレースホルダーで完全一致検索(""で囲む)の入力方法を案内している', () => {
   const kInput = container.querySelector('#input-k');
-  act(() => fireInput(kInput, '異世界'));
+  expect(kInput.placeholder).toContain('"..."');
 
-  const checkbox = kInput.closest('.field').querySelector('input[type=checkbox]');
-  act(() => checkbox.click());
-
+  act(() => fireInput(kInput, '"異世界"'));
   const k = decodeURIComponent(new URL(outputUrl()).searchParams.get('k'));
   expect(k).toBe('"異世界"');
 });
@@ -200,7 +198,7 @@ test('ポイント還元率・ポイント対象・値引き/セールのチェ�
 test('検索クエリ欄: クリアボタンは入力欄のすぐ右となりにあり、空のときは無効・入力すると有効になる', () => {
   const kInput = container.querySelector('#input-k');
   const row = kInput.closest('.action-row');
-  const clearIcon = row.querySelector('.icon-button');
+  const clearIcon = row.querySelector('[aria-label="クリア"]');
 
   // ボックス内(input自体の子孫)ではなく、ボックスの外(すぐ右となり)にある
   expect(kInput.contains(clearIcon)).toBe(false);
@@ -276,16 +274,16 @@ test('並び順をラジオボタンで選ぶとsパラメータが付き、関�
   expect(new URL(outputUrl()).searchParams.has('s')).toBe(false);
 });
 
-test('「すべて展開」ボタンで全アコーディオンが開き、再度押すと全て閉じる(初期状態は検索クエリ/絞り込みの2つだけ開いている)', () => {
+test('「すべて展開」ボタンで全アコーディオンが開き、再度押すと全て閉じる(初期状態は検索・絞り込みのみ開いている)', () => {
   function toggleAllButton() {
     return container.querySelector('.float-toggle-button');
   }
 
-  expect(container.querySelectorAll('.accordion-body')).toHaveLength(2);
+  expect(container.querySelectorAll('.accordion-body')).toHaveLength(1);
   expect(toggleAllButton().textContent).toContain('すべて展開');
 
   act(() => toggleAllButton().click());
-  expect(container.querySelectorAll('.accordion-body')).toHaveLength(7);
+  expect(container.querySelectorAll('.accordion-body')).toHaveLength(6);
   expect(toggleAllButton().textContent).toContain('すべて折りたたむ');
 
   act(() => toggleAllButton().click());
