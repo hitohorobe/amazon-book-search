@@ -81,6 +81,19 @@ label { display: inline-block; margin: 0.2em 0.6em 0.2em 0; }
 .accordion-chevron-open { transform: rotate(180deg); }
 .accordion-body { padding: 0 1rem 0.5rem; }
 
+/* --- 検索クエリ/絞り込みの2カラム化。テキスト欄がアコーディオン幅いっぱいに
+   広がってデッドスペースが目立つため、狭幅では1列(従来通り縦積み)、
+   広幅では2列にしてスペースを活かす。列内の最初のfieldはグローバルな
+   .field:first-childにより自動的に区切り線なしになる(親を問わないセレクタのため)。 */
+.two-col-group {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 2rem;
+}
+@media (min-width: 900px) {
+  .two-col-group { grid-template-columns: 1fr 1fr; }
+}
+
 /* --- Field(アコーディオン内の1項目分のサブセクション) --- */
 /* 項目名(legend)を本体(body)の左に固定幅で並べ、どの項目もテキストボックス等の
    開始位置(x座標)が揃うようにする。align-items: centerにより、本体がテキスト

@@ -55,10 +55,10 @@ function bbnMapFor(bbnItems) {
   return Object.fromEntries(bbnItems.map((i) => [i.label, i.nodeId]));
 }
 
-const ACCORDION_TITLES = ['検索クエリ', '絞り込み', '価格', '発売日', 'ポイント・セール', '並び順', 'アソシエイトID'];
+const ACCORDION_TITLES = ['検索・絞り込み', '価格', '発売日', 'ポイント・セール', '並び順', 'アソシエイトID'];
 
 const initialOpenSections = Object.fromEntries(
-  ACCORDION_TITLES.map((title) => [title, title === '検索クエリ' || title === '絞り込み'])
+  ACCORDION_TITLES.map((title) => [title, title === '検索・絞り込み'])
 );
 
 const initialForm = {
@@ -140,56 +140,60 @@ export default function App() {
         </div>
 
         <div id="params-area">
-          <AccordionSection title="検索クエリ" open={openSections['検索クエリ']} onToggle={() => toggleSection('検索クエリ')}>
-            <ClearableTextField legend="検索クエリ" id="input-k" value={form.k} onChange={(k) => patch({ k })}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={form.exactMatch}
-                  onChange={(e) => patch({ exactMatch: e.target.checked })}
+          <AccordionSection title="検索・絞り込み" open={openSections['検索・絞り込み']} onToggle={() => toggleSection('検索・絞り込み')}>
+            <div className="two-col-group">
+              <div className="two-col">
+                <ClearableTextField legend="検索クエリ" id="input-k" value={form.k} onChange={(k) => patch({ k })}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={form.exactMatch}
+                      onChange={(e) => patch({ exactMatch: e.target.checked })}
+                    />
+                    完全一致で検索(クエリを&quot;&quot;で囲む)
+                  </label>
+                </ClearableTextField>
+
+                <ClearableTextField
+                  legend="マイナス検索"
+                  id="input-minus_keywords"
+                  value={form.minusKeywords}
+                  onChange={(minusKeywords) => patch({ minusKeywords })}
                 />
-                完全一致で検索(クエリを&quot;&quot;で囲む)
-              </label>
-            </ClearableTextField>
 
-            <ClearableTextField
-              legend="マイナス検索"
-              id="input-minus_keywords"
-              value={form.minusKeywords}
-              onChange={(minusKeywords) => patch({ minusKeywords })}
-            />
+                <ClearableTextField
+                  legend="まとめリンク作成"
+                  id="input-bundle_asins"
+                  value={form.bundleAsins}
+                  onChange={(bundleAsins) => patch({ bundleAsins })}
+                  placeholder={isPaper ? '9784041031004|9784041031011' : 'B00A2MD724|B009KWU90U'}
+                />
+              </div>
 
-            <ClearableTextField
-              legend="まとめリンク作成"
-              id="input-bundle_asins"
-              value={form.bundleAsins}
-              onChange={(bundleAsins) => patch({ bundleAsins })}
-              placeholder={isPaper ? '9784041031004|9784041031011' : 'B00A2MD724|B009KWU90U'}
-            />
-          </AccordionSection>
+              <div className="two-col">
+                <CategorySelector
+                  key={form.format}
+                  tree={active.nodes.tree}
+                  value={form.nodeId}
+                  onChange={(nodeId) => patch({ nodeId })}
+                />
 
-          <AccordionSection title="絞り込み" open={openSections['絞り込み']} onToggle={() => toggleSection('絞り込み')}>
-            <CategorySelector
-              key={form.format}
-              tree={active.nodes.tree}
-              value={form.nodeId}
-              onChange={(nodeId) => patch({ nodeId })}
-            />
+                <DatalistField
+                  legend="出版社"
+                  id="input-publisher"
+                  options={publishersData.items}
+                  value={form.publisher}
+                  onChange={(publisher) => patch({ publisher })}
+                />
 
-            <DatalistField
-              legend="出版社"
-              id="input-publisher"
-              options={publishersData.items}
-              value={form.publisher}
-              onChange={(publisher) => patch({ publisher })}
-            />
-
-            <ClearableTextField
-              legend="著者"
-              id="input-author"
-              value={form.author}
-              onChange={(author) => patch({ author })}
-            />
+                <ClearableTextField
+                  legend="著者"
+                  id="input-author"
+                  value={form.author}
+                  onChange={(author) => patch({ author })}
+                />
+              </div>
+            </div>
           </AccordionSection>
 
           <AccordionSection title="価格" open={openSections['価格']} onToggle={() => toggleSection('価格')}>
