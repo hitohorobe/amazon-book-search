@@ -305,9 +305,9 @@ describe('紙の本 / Kindle本の切り替え', () => {
     expect(outputUrl()).toBe('https://www.amazon.co.jp/s?i=stripbooks&tag=hito-horobe-22');
   });
 
-  test('Kindle本に切り替えるとi=digital-textになり、ジャンルツリーが差し替わる', () => {
+  test('Kindle本に切り替えるとiが外れてrh=n:2275256051になり、ジャンルツリーが差し替わる', () => {
     act(() => checkboxFor('Kindle本').click());
-    expect(outputUrl()).toBe('https://www.amazon.co.jp/s?i=digital-text&tag=hito-horobe-22');
+    expect(outputUrl()).toBe('https://www.amazon.co.jp/s?rh=n%3A2275256051&tag=hito-horobe-22');
 
     const topSelect = container.querySelectorAll('#node-selects select')[0];
     const labels = [...topSelect.options].map((o) => o.textContent);
@@ -327,7 +327,7 @@ describe('紙の本 / Kindle本の切り替え', () => {
 
     const shonenOption = [...level1.options].find((o) => o.textContent === '少年マンガ');
     act(() => fireChange(level1, shonenOption.value));
-    expect(outputUrl()).toContain(`rh=n%3A${shonenOption.value}`);
+    expect(outputUrl()).toContain(`rh=n%3A2275256051%2Cn%3A${mangaOption.value}%2Cn%3A${shonenOption.value}`);
   });
 
   test('ジャンル等を選んだ状態でKindleへ切り替えると選択がリセットされる', () => {
@@ -337,7 +337,7 @@ describe('紙の本 / Kindle本の切り替え', () => {
     expect(outputUrl()).toContain('rh=n%3A466284');
 
     act(() => checkboxFor('Kindle本').click());
-    expect(outputUrl()).toBe('https://www.amazon.co.jp/s?i=digital-text&tag=hito-horobe-22');
+    expect(outputUrl()).toBe('https://www.amazon.co.jp/s?rh=n%3A2275256051&tag=hito-horobe-22');
   });
 
   test('Kindle選択時は「ポイント対象」「値引き・セール」が非表示になり、「読み放題」が表示される', () => {
@@ -364,7 +364,7 @@ describe('紙の本 / Kindle本の切り替え', () => {
     const checkbox = container.querySelector('input[name=input-reading_program]');
     act(() => checkbox.click());
     const rh = decodeURIComponent(new URL(outputUrl()).searchParams.get('rh'));
-    expect(rh).toBe('p_n_feature_nineteen_browse-bin:3169286051');
+    expect(rh).toBe('n:2275256051,p_n_feature_nineteen_browse-bin:3169286051');
   });
 
   test('Kindleのポイント還元率プリセット(紙とは別体系)が使える', () => {
@@ -372,7 +372,7 @@ describe('紙の本 / Kindle本の切り替え', () => {
     const checkbox = container.querySelector('input[name=input-points_ratio]');
     act(() => checkbox.click());
     const rh = decodeURIComponent(new URL(outputUrl()).searchParams.get('rh'));
-    expect(rh).toBe('p_n_amazon_points_ratio:10476514051');
+    expect(rh).toBe('n:2275256051,p_n_amazon_points_ratio:10476514051');
   });
 
   test('紙に戻すとi=stripbooksに戻る', () => {

@@ -20,6 +20,7 @@ import bbnKindleData from '../data/bbnKindle.json';
 import readingProgramsData from '../data/readingPrograms.json';
 
 import { buildSearchUrl } from './lib/buildSearchUrl.js';
+import { findPathToId } from './lib/nodeTree.js';
 import Icon from './components/Icon.jsx';
 import AccordionSection from './components/AccordionSection.jsx';
 import FormatField from './components/FormatField.jsx';
@@ -120,8 +121,16 @@ export default function App() {
   const bbnMap = useMemo(() => bbnMapFor(active.bbn.items), [active.bbn]);
 
   const url = useMemo(
-    () => buildSearchUrl({ ...form, bbnId: bbnMap[form.bbnLabel] || null }, active.config),
-    [form, active.config, bbnMap]
+    () =>
+      buildSearchUrl(
+        {
+          ...form,
+          nodePath: findPathToId(active.nodes.tree, form.nodeId),
+          bbnId: bbnMap[form.bbnLabel] || null,
+        },
+        active.config
+      ),
+    [form, active.config, active.nodes, bbnMap]
   );
 
 

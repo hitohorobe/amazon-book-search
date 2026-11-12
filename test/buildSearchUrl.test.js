@@ -1,4 +1,4 @@
-import { test } from 'vitest';
+import { describe, test } from 'vitest';
 import assert from 'node:assert/strict';
 import { buildSearchUrl } from '../src/lib/buildSearchUrl.js';
 
@@ -162,4 +162,36 @@ test('読み放題は完全なキー:値をそのまま個別のrhエントリ�
     rh,
     'p_n_feature_nineteen_browse-bin:3169286051,p_n_special_merchandising_browse-bin:5304495051'
   );
+});
+
+describe('Kindle本(rootNodeIdあり・searchIndexなし)', () => {
+  const kindleConfig = {
+    baseUrl: 'https://www.amazon.co.jp/s',
+    rootNodeId: '2275256051',
+    rhKeys: { category: 'n', publisher: 'p_lbr_publishers_browse-bin' },
+  };
+
+  test('空フォームではiを付けず、rhにルートのn:2275256051だけを入れる', () => {
+    const url = buildSearchUrl({}, kindleConfig);
+    assert.equal(url, 'https://www.amazon.co.jp/s?rh=n%3A2275256051');
+  });
+
+  // i=digital-textでrhにn:が無いと、Amazonで並べ替えたときに出版社の絞り込みが外れる(issue #19)
+  test('出版社だけ指定してもrhの先頭にn:2275256051が入る', () => {
+    const url = buildSearchUrl({ publisher: 'KADOKAWA' }, kindleConfig);
+    const params = new URL(url).searchParams;
+    assert.equal(params.has('i'), false);
+    assert.equal(params.get('rh'), 'n:2275256051,p_lbr_publishers_browse-bin:KADOKAWA');
+  });
+
+  test('nodePathがあればルートから祖先順にn:を並べる', () => {
+    const url = buildSearchUrl(
+      { nodeId: '2430869051', nodePath: ['2293143051', '2430869051'], publisher: 'KADOKAWA' },
+      kindleConfig
+    );
+    assert.equal(
+      new URL(url).searchParams.get('rh'),
+      'n:2275256051,n:2293143051,n:2430869051,p_lbr_publishers_browse-bin:KADOKAWA'
+    );
+  });
 });

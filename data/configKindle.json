@@ -1,8 +1,7 @@
 {
   "baseUrl": "https://www.amazon.co.jp/s",
-  "searchIndex": "digital-text",
-  "searchIndexVerified": true,
-  "searchIndexNote": "検証済み: Kindle版参考ツール(https://yapi.ta2o.net/tools/kinsaku.html)が実際に使用しているsearchIndexの値。",
+  "rootNodeId": "2275256051",
+  "rootNodeIdNote": "iは付けず、rhの先頭に常にn:2275256051(Kindle本)を入れる(issue #19、Kindle版参考ツール https://yapi.ta2o.net/tools/kinsaku.html と同じ方式)。検証済み(2026-11-12): i=digital-textでrhにn:が1つも無いと、検索結果ページの並べ替えリンクからrhが丸ごと消え、並べ替えると出版社などの絞り込みが外れる。rhにn:2275256051を含めれば並べ替え後もrhが保持され、iはAmazon側が自動で付ける(マンガ配下ならi=manga-store)。",
   "rhKeys": {
     "category": "n",
     "publisher": "p_lbr_publishers_browse-bin",
@@ -13,7 +12,7 @@
     "pointsRatio": "p_n_amazon_points_ratio"
   },
   "rhKeysNote": {
-    "category": "検証済み: Kindle版参考ツールが実際に使用しているキー名(Kindle本のnode idは紙書籍と別体系)。",
+    "category": "検証済み: Kindle版参考ツールと同じく、ルート(rootNodeId)から選択ノードまでの祖先パスをn:で個別に並べる(例: n:2275256051,n:2293143051,n:2430869051)。Kindle本のnode idは紙書籍と別体系。",
     "publisher": "検証済み: Kindle版参考ツールが実際に使用しているキー名。",
     "author": "紙書籍(p_27)と同じ書籍検索共通のキーと推測しているが、Kindle向けには未検証。",
     "priceDetail": "紙書籍(p_36)と同じ価格の汎用キーと推測しているが、Kindle向けには未検証。",
