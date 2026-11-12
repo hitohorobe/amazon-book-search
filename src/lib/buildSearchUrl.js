@@ -31,7 +31,8 @@ function pushMultiSelect(rhParts, key, ids) {
 export function buildSearchUrl(form, config) {
   const params = new URLSearchParams();
 
-  params.set('i', config.searchIndex);
+  // Kindle本はiを付けない(rhのn:からAmazonが部門を自動で決める)。configKindle.jsonのrootNodeIdNote参照。
+  if (config.searchIndex) params.set('i', config.searchIndex);
 
   if (form.k) {
     params.set('k', form.k.trim());
@@ -42,7 +43,13 @@ export function buildSearchUrl(form, config) {
 
   const rhParts = [];
 
-  if (form.nodeId) rhParts.push(`${config.rhKeys.category}:${form.nodeId}`);
+  // カテゴリー: rootNodeIdがある(Kindle本)場合は、ルートを先頭に選択ノードまでの祖先パス(nodePath)を
+  // 個別のn:エントリで並べる(参考ツールkinsakuと同じ方式)。rootNodeIdが無い(紙の本)場合は最も深いnodeIdのみ。
+  const leafIds = form.nodeId ? [form.nodeId] : [];
+  const categoryIds = config.rootNodeId
+    ? [config.rootNodeId, ...(form.nodePath || leafIds)]
+    : leafIds;
+  [...new Set(categoryIds)].forEach((id) => rhParts.push(`${config.rhKeys.category}:${id}`));
 
   if (form.publisher) rhParts.push(`${config.rhKeys.publisher}:${form.publisher.trim()}`);
 
